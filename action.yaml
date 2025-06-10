@@ -214,12 +214,15 @@ runs:
         fi
 
         echo "Running tests in: ${{ env.tests_path }} 🧪"
+
         if [ "f${{ inputs.permit_fail }}" = 'ftrue' ]; then
+          echo "Command: pytest $coverage_flags ${{ env.tests_path }} || true"
           echo 'Warning: flag set to permit test failures ⚠️'
           pytest \
             $coverage_flags \
             ${{ env.tests_path }} || true
         else
+          echo "Command: pytest $coverage_flags ${{ env.tests_path }}"
           pytest \
             $coverage_flags \
             ${{ env.tests_path }}
